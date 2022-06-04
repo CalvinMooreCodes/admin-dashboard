@@ -50,6 +50,19 @@ table {
 
 /* general elements */
 
+body {
+	background-color: black;
+	min-height: 100vh;
+}
+
+p {
+	font-size: 12px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
 /* * {
 	border: 1px solid black;
 } */
@@ -59,26 +72,51 @@ table {
 .main-container {
 	display: grid;
 	resize:both;
+	max-width: 75%;
 	grid-template-columns: 1fr 4fr;
+	grid-template-rows: 1fr 7fr;
 	grid-template-areas: 
 	"sidebar header"
 	"sidebar main-content";
-	gap: 15px;
+	margin: auto;
 }
 
 .sidebar {
 	grid-area: sidebar;
-	padding-left: 50px;
-	background-color: lightblue;
+	padding-left: 10px;
+	background-color:  rgb(84, 84, 209);
 	display: grid;
-	grid-template-rows: 1fr 3fr 2fr 6fr;
+	grid-template-rows: 1fr 3fr 2fr;
 	color: white;
+	gap: 50px;
+	height:1000px ;
+}
+
+.sidebar * button {
+	border: none;
+	background-color: rgb(84, 84, 209);
+	color: white;
+}
+
+.sidebar * button:hover, img:hover {
+	color: black;
+}
+
+.zoom-in {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.zoom-in:hover {
+	-webkit-transform: scale(1.5);
+	transform: scale(1.5);
 }
 
 .grouped-items {
 	display: flex;
 	flex-direction: column;
-	flex-basis:content;
 }
 
 .item {
@@ -91,19 +129,28 @@ table {
 	justify-content: space-between;
 	align-self: center;
 	margin: 15px;
-	justify-content: center;
 }
 
 .header {
 	grid-area: header;
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas: 
+	"top-row"
+	"bottom-row"
+	;
+	height: 180px;
+	background-color: white;
 }
 
 .top-row {
+	grid-area: top-row;
 	display: grid;
 	grid-template-columns: 8fr auto auto 1fr;
 	grid-template-areas: 
 	"search-bar notification-bel profile-picture user-name"
 	;
+	align-content: center;
 }
 
 .search-bar {
@@ -114,6 +161,8 @@ table {
 	border-radius: 10px;
 	height: 1,5rem;
 	width: 80%;
+	background-color: rgb(158, 179, 218);
+	padding: 2px;
 }
 
 .notification-bel {
@@ -122,12 +171,178 @@ table {
 
 .profile-picture {
 	grid-area: profile-picture;
+	display: flex;
 }
 
 .user-name {
 	grid-area: user-name;
+	margin: auto;
+	font-size: 15px;
+}
+
+.top-row>.user-name {
+	padding-right: 20px;
+}
+
+.bottom-row {
+	grid-area: bottom-row;
+	display: grid;
+	grid-template-columns: 1fr 6fr 3fr;
+	grid-template-areas: 
+	"profile-picture greetin-message buttons"
+	;
+}
+
+.bottom-row>.profile-picture>img {
+	margin: auto;
+	width: 3rem;
+}
+
+.bottom-row>.greeting-message {
+	padding-top: 1rem;
+}
+
+.buttons {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-areas: 
+	"new upload share"
+	;
+}
+
+.buttons > * button {
+	border: none;
+	border-radius: 10px;
+	background-color: rgb(84, 84, 209);
+	color:white;
+	padding: 10px;
+}
+
+.buttons > * button:hover {
+	color: black;
+}
+
+.new {
+	grid-area: new;
+}
+
+.upload {
+	grid-area: upload;
+}
+
+.share {
+	grid-area: share;
 }
 
 .main-content {
 	grid-area: main-content;
+	position: relative;
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 15px;
+	padding-top: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+	grid-template-areas: 
+	"project-cards main-announcements"
+	"project-cards main-trending"
+	;
+	height:771px;
+	background-color: rgb(158, 179, 218);
 }
+
+.projects {
+	position: absolute;
+	left: 20px;
+	top: 10px;
+	font-size: 15px;
+}
+
+.announcements{
+	position: absolute;
+	right: 106px;
+	top: 10px;
+	font-size: 15px;
+}
+
+.trending {
+	position: absolute;
+	right: 150px;
+	bottom: 320px;
+	font-size: 15px;
+}
+
+.project-cards {
+	grid-area: project-cards;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 15px;
+	padding-bottom: 30px;
+}
+
+.card {
+	border-radius: 10px;
+	text-align: center;
+	background-color: white;
+	padding: 30px 20px;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.flex-container>li {
+	padding: 10px;
+}
+
+.main-announcements {
+	grid-area: main-announcements;
+	position: relative;
+	background-color: white;
+	border-radius: 10px;
+	padding: 30px 20px;
+}
+
+.line {
+	border-bottom: 1px solid black;
+	padding-bottom: 5px;
+}
+
+.main-trending {
+	grid-area: main-trending;
+	display: flex;
+	align-content: space-between;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 10px;
+	margin-top: 60px;
+	margin-bottom: 30px;
+	padding: 30px 20px;
+}
+
+.item1 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: 
+	"account-pic account-name"
+	;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+}
+
+.account-pic {
+	grid-area: account-pic;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+.account-name {
+	grid-area: account-name;
+}
+
